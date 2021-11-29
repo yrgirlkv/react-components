@@ -1,26 +1,41 @@
-// var GroceryList = () => (
-//   <div>
-//     <ul>
-//       {
-//         groceryArray.map((listItem) => (
-//           <li >{listItem}</li>
-//         ))
-//       }
-//     </ul>
-//   </div>
-// );
-
 var listArray = ['Chicken & maple sausages', 'Frozen pizza - BBQ chicken', 'Pepper turkey'];
 
 class GroceryListItem extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      // hovered: false,
+      done: false
+    };
+  }
+
+  onMouseHover() {
+    this.setState({hovered: true});
+  }
+
+  onMouseUnhover() {
+    this.setState({hovered: false});
+  }
+
+  onListItemClick() {
+    this.setState({
+      done: !this.state.done
+    })
   }
 
   render () {
+    var style = {
+      fontWeight: this.state.hovered ? 'bold' : 'normal',
+    }
     return (
-      <li>{this.props.groceryItem}</li>
+      <li
+        style = {style}
+        onMouseEnter = {this.onMouseHover.bind(this)}
+        onMouseLeave = {this.onMouseUnhover.bind(this)}
+      >
+        {this.props.groceryItem}</li>
     );
   }
 }
